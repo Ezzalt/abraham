@@ -34,7 +34,7 @@
       <% if step.key?('permission') %>
       showOn: function() {
         // Only display this step if its selector is present
-        return (<%= escape_javascript(step['permission']) %> && document.querySelector("<%= escape_javascript(step['attachTo']['element'].html_safe) %>") )? true : false
+        return (<%= escape_javascript(step['permission'].html_safe) %> && document.querySelector("<%= escape_javascript(step['attachTo']['element'].html_safe) %>") )? true : false
       },
       <% else %>
       showOn: function() {
