@@ -48,8 +48,10 @@
 
     buttons: [
     <% if step.key?('buttons') %>
-      <% step['buttons'].each do |button| %>
-        { text: '<%= button[1]['text']  %>', action: Abraham.tours["<%= tour_name %>"].<%= button[1]['action'] %>, classes: '<%= button[1]['classes'] %>' },
+      <% if step['buttons'] != 'none' %>
+        <% step['buttons'].each do |button| %>
+          { text: '<%= button[1]['text']  %>', action: Abraham.tours["<%= tour_name %>"].<%= button[1]['action'] %>, classes: '<%= button[1]['classes'] %>' },
+        <% end %>
       <% end %>
     <% else %>
       <% if index == steps.size - 1 %>
