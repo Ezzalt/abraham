@@ -24,6 +24,7 @@
   <% steps.each_with_index do |(key, step), index| %>
   Abraham.tours["<%= tour_name %>"].addStep({
     id: 'step-<%= key %>',
+    modalOverlayOpeningRadius: 5,
     <% if step.key?('title') %>
     title: "<%= step['title'] %>",
     <% end %>
@@ -35,6 +36,16 @@
       return document.querySelector("<%= escape_javascript(step['attachTo']['element'].html_safe) %>") ? true : false
     },
     <% end %>
+    <% if step.key?('canClickTarget') %>
+    canClickTarget: "<%= escape_javascript(step['canClickTarget'].html_safe) %>",
+    <% end %>
+    <% if step.key?('advanceOn') %>
+    advanceOn: { selector: "<%= escape_javascript(step['advanceOn']['selector'].html_safe) %>", event: "<%= escape_javascript(step['advanceOn']['event'].html_safe) %>" },
+    <% end %>
+    <% if step.key?('when') %>
+    when: { show: function(){"<%= escape_javascript(step['when']['function'].html_safe) %>"}},
+    <% end %>
+
     buttons: [
     <% if step.key?('buttons') %>
       <% step['buttons'].each do |button| %>
