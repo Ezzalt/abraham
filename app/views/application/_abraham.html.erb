@@ -31,10 +31,17 @@
     text: "<%= step['text'] %>",
     <% if step.key?('attachTo') %>
     attachTo: { element: "<%= escape_javascript(step['attachTo']['element'].html_safe) %>", on: "<%= step['attachTo']['placement'] %>" },
-    showOn: function() {
-      // Only display this step if its selector is present
-      return document.querySelector("<%= escape_javascript(step['attachTo']['element'].html_safe) %>") ? true : false
-    },
+      <% if step.key?('permission') %>
+      showOn: function() {
+        // Only display this step if its selector is present
+        return (<%= escape_javascript(step['permission']) %> && document.querySelector("<%= escape_javascript(step['attachTo']['element'].html_safe) %>") )? true : false
+      },
+      <% else %>
+      showOn: function() {
+        // Only display this step if its selector is present
+        return document.querySelector("<%= escape_javascript(step['attachTo']['element'].html_safe) %>") ? true : false
+      },
+      <% end %>
     <% end %>
     <% if step.key?('canClickTarget') %>
     canClickTarget: "<%= escape_javascript(step['canClickTarget']) %>",
