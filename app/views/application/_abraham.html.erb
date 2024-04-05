@@ -3,7 +3,8 @@
 
   <% if trigger != 'manual' %>
   Abraham.tours["<%= tour_name %>"].on("complete", function() {
-    // Make AJAX call to save history of tour completion
+      // Make AJAX call to save history of tour completion
+    Cookies.set('<%= abraham_cookie_prefix %>-<%= tour_name %>', 'complete', { domain: '<%= abraham_domain %>' });
     return fetch("/abraham_histories/", {
       method: "POST",
       headers: { 'Content-Type': 'application/json' },
