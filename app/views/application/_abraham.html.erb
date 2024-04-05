@@ -11,13 +11,25 @@
         authenticity_token: '<%= form_authenticity_token %>',
         controller_name: '<%= controller_path %>',
         action_name: '<%= action_name %>',
-        tour_name: '<%= tour_name %>'
+        tour_name: '<%= tour_name %>',
+        tour_completion: true
       })
     });
   });
 
   Abraham.tours["<%= tour_name %>"].on("cancel", function() {
     Cookies.set('<%= abraham_cookie_prefix %>-<%= tour_name %>', 'later', { domain: '<%= abraham_domain %>' });
+      return fetch("/abraham_histories/", {
+          method: "POST",
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+              authenticity_token: '<%= form_authenticity_token %>',
+              controller_name: '<%= controller_path %>',
+              action_name: '<%= action_name %>',
+              tour_name: '<%= tour_name %>',
+              tour_completion: false
+          })
+      });
   });
   <% end %>
 

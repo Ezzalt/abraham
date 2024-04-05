@@ -16,6 +16,6 @@ class AbrahamHistoriesController < ApplicationController
   private
 
     def abraham_history_params
-      params.require(:abraham_history).permit(:controller_name, :action_name, :tour_name)
+      params.require(:abraham_history).permit(:controller_name, :action_name, :tour_name, :tour_completion)
     end
 end
