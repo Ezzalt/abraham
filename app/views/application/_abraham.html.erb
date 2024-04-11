@@ -56,7 +56,13 @@
       },
       <% end %>
     <% end %>
-    <% if step.key?('canClickTarget') %>
+    <% if step.key?('permission') && !step.key?('attachTo') %>
+      showOn: function() {
+          // Only display this step if its selector is present
+          return (<%= escape_javascript(step['permission'].html_safe) %>)? true : false
+      },
+    <% end %>
+      <% if step.key?('canClickTarget') %>
     canClickTarget: "<%= escape_javascript(step['canClickTarget']) %>",
     <% end %>
     <% if step.key?('advanceOn') %>
