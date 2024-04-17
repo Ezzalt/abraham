@@ -63,7 +63,6 @@
       },
     <% end %>
     <% if instruction.key?('canClickTarget') %>
-      debugger;
     canClickTarget: <%= escape_javascript(instruction['canClickTarget']) %> === true,
     <% end %>
     <% if instruction.key?('advanceOn') %>
