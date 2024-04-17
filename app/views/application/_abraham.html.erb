@@ -63,7 +63,7 @@
       },
     <% end %>
       <% if step.key?('canClickTarget') %>
-    canClickTarget: "<%= escape_javascript(step['canClickTarget']) %>",
+    canClickTarget: <%= escape_javascript(step['canClickTarget']) %>,
     <% end %>
     <% if step.key?('advanceOn') %>
     advanceOn: { selector: "<%= escape_javascript(step['advanceOn']['selector'].html_safe) %>", event: "<%= escape_javascript(step['advanceOn']['event'].html_safe) %>" },
