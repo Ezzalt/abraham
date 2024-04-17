@@ -34,48 +34,50 @@
   });
   <% end %>
 
-  <% steps.each_with_index do |(key, instruction), index| %>
+  <% steps.each_with_index do |(key, step), index| %>
+
   Abraham.tours["<%= tour_name %>"].addStep({
     id: 'step-<%= key %>',
     modalOverlayOpeningRadius: 5,
-    <% if instruction.key?('title') %>
-    title: "<%= instruction['title'] %>",
+    <% if step.key?('title') %>
+    title: "<%= step['title'] %>",
     <% end %>
-    text: "<%= instruction['text'] %>",
-    <% if instruction.key?('attachTo') %>
-    attachTo: { element: "<%= escape_javascript(instruction['attachTo']['element'].html_safe) %>", on: "<%= instruction['attachTo']['placement'] %>" },
-      <% if instruction.key?('permission') %>
-      showOn: function() {
-        // Only display this instruction if its selector is present
-        return (<%= escape_javascript(instruction['permission'].html_safe) %> && document.querySelector("<%= escape_javascript(instruction['attachTo']['element'].html_safe) %>") )? true : false
-      },
+    text: "<%= step['text'] %>",
+    <% if step.key?('attachTo') %>
+    attachTo: { element: "<%= escape_javascript(step['attachTo']['element'].html_safe) %>", on: "<%= step['attachTo']['placement'] %>" },
+      <% if step.key?('permission') %>
+    showOn: function() {
+      // Only display this step if its selector is present
+        let showIf = <%= escape_javascript(step['permission'].html_safe) %> && document.querySelector("<%= escape_javascript(step['attachTo']['element'].html_safe) %>")
+      return !!showIf
+    },
       <% else %>
-      showOn: function() {
-        // Only display this instruction if its selector is present
-        return document.querySelector("<%= escape_javascript(instruction['attachTo']['element'].html_safe) %>") ? true : false
-      },
+    showOn: function() {
+      // Only display this step if its selector is present
+      return document.querySelector("<%= escape_javascript(step['attachTo']['element'].html_safe) %>") ? true : false
+    },
       <% end %>
     <% end %>
-    <% if instruction.key?('permission') && !instruction.key?('attachTo') %>
-      showOn: function() {
-          // Only display this instruction if its selector is present
-          return (<%= escape_javascript(instruction['permission'].html_safe) %>)? true : false
-      },
+    <% if step.key?('permission') && !step.key?('attachTo') %>
+    showOn: function() {
+        // Only display this step if its selector is present
+        return (<%= escape_javascript(step['permission'].html_safe) %>)? true : false
+    },
     <% end %>
-    <% if instruction.key?('canClickTarget') %>
-    canClickTarget: <%= escape_javascript(instruction['canClickTarget']) %> === true,
+    <% if step.key?('canClickTarget') %>
+    canClickTarget: <%= escape_javascript(step['canClickTarget']) %> === true,
     <% end %>
-    <% if instruction.key?('advanceOn') %>
-    advanceOn: { selector: "<%= escape_javascript(instruction['advanceOn']['selector'].html_safe) %>", event: "<%= escape_javascript(instruction['advanceOn']['event'].html_safe) %>" },
+    <% if step.key?('advanceOn') %>
+    advanceOn: { selector: "<%= escape_javascript(step['advanceOn']['selector'].html_safe) %>", event: "<%= escape_javascript(step['advanceOn']['event'].html_safe) %>" },
     <% end %>
-    <% if instruction.key?('when') %>
-    when: { show: function(){"<%= escape_javascript(instruction['when']['function'].html_safe) %>"}},
+    <% if step.key?('when') %>
+    when: { show: function(){"<%= escape_javascript(step['when']['function'].html_safe) %>"}},
     <% end %>
 
     buttons: [
-    <% if instruction.key?('buttons') %>
-      <% if instruction['buttons'] != 'none' %>
-        <% instruction['buttons'].each do |button| %>
+    <% if step.key?('buttons') %>
+      <% if step['buttons'] != 'none' %>
+        <% step['buttons'].each do |button| %>
           { text: '<%= button[1]['text']  %>', action: Abraham.tours["<%= tour_name %>"].<%= button[1]['action'] %>, classes: '<%= button[1]['classes'] %>' },
         <% end %>
       <% end %>
