@@ -62,9 +62,8 @@
           return (<%= escape_javascript(instruction['permission'].html_safe) %>)? true : false
       },
     <% end %>
-      <% if instruction.key?('canClickTarget') %>
-      <% binding.pry %>
-    canClickTarget: <%= escape_javascript(instruction['canClickTarget']) %>,
+    <% if instruction.key?('canClickTarget') %>
+    canClickTarget: <%= escape_javascript(instruction['canClickTarget']) %> === true,
     <% end %>
     <% if instruction.key?('advanceOn') %>
     advanceOn: { selector: "<%= escape_javascript(instruction['advanceOn']['selector'].html_safe) %>", event: "<%= escape_javascript(instruction['advanceOn']['event'].html_safe) %>" },
