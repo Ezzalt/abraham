@@ -38,7 +38,7 @@
   Abraham.tours["<%= tour_name %>"].addStep({
     id: 'step-<%= key %>',
     modalOverlayOpeningRadius: 5,
-    <% if step.key?('title') %>
+    <% if instruction.key?('title') %>
     title: "<%= instruction['title'] %>",
     <% end %>
     text: "<%= instruction['text'] %>",
