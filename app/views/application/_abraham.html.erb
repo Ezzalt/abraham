@@ -63,6 +63,7 @@
       },
     <% end %>
       <% if step.key?('canClickTarget') %>
+      <% binding.pry %>
     canClickTarget: <%= escape_javascript(step['canClickTarget']) %>,
     <% end %>
     <% if step.key?('advanceOn') %>
