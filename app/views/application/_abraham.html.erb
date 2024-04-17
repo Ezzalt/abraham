@@ -109,6 +109,7 @@
         <% end %>
         
         if (tourMayStart) {
+          Cookies.set('<%= abraham_cookie_prefix %>-<%= tour_name %>', 'running', { domain: '<%= abraham_domain %>' });
           start();
         }
       }
