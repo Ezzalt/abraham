@@ -89,7 +89,7 @@
           { text: '<%= t('abraham.later') %>', action: Abraham.tours["<%= tour_name %>"].cancel, classes: 'shepherd-button-secondary' },
           { text: '<%= t('abraham.continue') %>', action: Abraham.tours["<%= tour_name %>"].next }
         <% else %>
-        { text: '<%= t('abraham.exit') %>', action: Abraham.tours["<%= tour_name %>"].cancel, classes: 'shepherd-button-secondary' },
+        { text: '<%= t('abraham.back') %>', action: Abraham.tours["<%= tour_name %>"].back, classes: 'shepherd-button-secondary' },
         { text: '<%= t('abraham.next') %>', action: Abraham.tours["<%= tour_name %>"].next }
         <% end %>
       <% end %>
