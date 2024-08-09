@@ -1,5 +1,5 @@
 //= require js.cookie
-//= require shepherd.js
+//= require shepherd.js/dist/js/shepherd
 var Abraham = new Object();
 
 Abraham.tours = {};
