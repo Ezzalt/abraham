@@ -1,23 +1,12 @@
 # frozen_string_literal: true
 source 'http://rubygems.org'
+ruby '3.3.4'
 
 group :development, :test do
   gem 'sassc-rails'
 end
 
-# Set the Rails version. We have this switch so that we can test multiple
-# versions for Rails on Travis CI.
-# Inspired by http://aaronmiler.com/blog/testing-your-rails-engine-with-multiple-versions-of-rails/
-rails_version = ENV['RAILS_VERSION'] || 'default'
-rails = case rails_version
-        when 'default'
-          '~> 5.2'
-        when 'master'
-          {github: 'rails/rails'}
-        else
-          "~> #{rails_version}"
-        end
-gem 'rails', rails
+gem "rails", '7.2.0.beta3'
 
 # Declare your gem's dependencies in abraham.gemspec.
 # Bundler will treat runtime dependencies like base dependencies, and
