@@ -65,7 +65,7 @@
     },
     <% end %>
     <% if step.key?('canClickTarget') %>
-    canClickTarget: <%= escape_javascript(step['canClickTarget'].html_safe) == "true" %> === true,
+    canClickTarget: <%= escape_javascript(step['canClickTarget']) %> === "true" ? true : false,
     <% end %>
     <% if step.key?('advanceOn') %>
     advanceOn: { selector: "<%= escape_javascript(step['advanceOn']['selector'].html_safe) %>", event: "<%= escape_javascript(step['advanceOn']['event'].html_safe) %>" },
@@ -110,6 +110,7 @@
         
         if (tourMayStart) {
           Cookies.set('<%= abraham_cookie_prefix %>-<%= tour_name %>', 'running', { domain: '<%= abraham_domain %>' });
+          get_replay = 1;
           start();
         }
       }
